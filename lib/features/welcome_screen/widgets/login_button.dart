@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:heal_chat/constants/theme_constants.dart';
 
 class LoginSignupButton extends StatelessWidget {
@@ -9,7 +10,7 @@ class LoginSignupButton extends StatelessWidget {
     return Column(
       children: [
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () => GoRouter.of(context).go("/login"),
           child: Text(
             'Login'.toUpperCase(),
             style: const TextStyle(
