@@ -43,7 +43,7 @@ class AuthForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => GoRouter.of(context).go("/home"),
             child: Text(
               isLoginForm ? "Login".toUpperCase() : "Signup".toUpperCase(),
               style: const TextStyle(
