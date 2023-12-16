@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:heal_chat/constants/theme_constants.dart';
+import 'package:heal_chat/features/auth/widgets/auth_form.dart';
 import 'package:heal_chat/utils/widgets.dart';
-
-import '../widgets/signup_form.dart';
-import '../widgets/signup_screen_top_image.dart';
+import '../widgets/top_image.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -17,7 +16,10 @@ class SignUpScreen extends StatelessWidget {
           desktop: Row(
             children: [
               Expanded(
-                child: SignUpScreenTopImage(),
+                child: AuthTopImage(
+                  imageAddress: 'assets/icons/signup.svg',
+                  imagePadding: defaultPadding * 2,
+                ),
               ),
               Expanded(
                 child: Column(
@@ -25,7 +27,9 @@ class SignUpScreen extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: 450,
-                      child: SignUpForm(),
+                      child: AuthForm(
+                        isLoginForm: false,
+                      ),
                     ),
                     SizedBox(height: defaultPadding / 2),
                   ],
@@ -49,13 +53,18 @@ class MobileSignupScreen extends StatelessWidget {
     return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SignUpScreenTopImage(),
+        AuthTopImage(
+          imageAddress: 'assets/icons/signup.svg',
+          imagePadding: defaultPadding,
+        ),
         Row(
           children: [
             Spacer(),
             Expanded(
               flex: 8,
-              child: SignUpForm(),
+              child: AuthForm(
+                isLoginForm: false,
+              ),
             ),
             Spacer(),
           ],

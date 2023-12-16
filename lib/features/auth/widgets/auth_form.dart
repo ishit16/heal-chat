@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:heal_chat/constants/theme_constants.dart';
-import 'package:heal_chat/features/auth/widgets/already_have_account.dart';
 
-import '../view/login_screen.dart';
+import 'already_have_account.dart';
 
-class SignUpForm extends StatelessWidget {
-  const SignUpForm({
-    Key? key,
-  }) : super(key: key);
+class AuthForm extends StatelessWidget {
+  final bool isLoginForm;
+  const AuthForm({super.key, required this.isLoginForm});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class SignUpForm extends StatelessWidget {
             cursorColor: kPrimaryColor,
             onSaved: (email) {},
             decoration: const InputDecoration(
-              hintText: "Your email",
+              hintText: "Your Email",
               prefixIcon: Padding(
                 padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
@@ -42,24 +41,24 @@ class SignUpForm extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: defaultPadding / 2),
+          const SizedBox(height: defaultPadding),
           ElevatedButton(
             onPressed: () {},
-            child: Text("Sign Up".toUpperCase()),
+            child: Text(
+              isLoginForm ? "Login".toUpperCase() : "Signup".toUpperCase(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
-            login: false,
             press: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const LoginScreen();
-                  },
-                ),
-              );
+              isLoginForm
+                  ? GoRouter.of(context).go("/signup")
+                  : GoRouter.of(context).go("/login");
             },
+            login: isLoginForm,
           ),
         ],
       ),

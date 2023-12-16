@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:heal_chat/features/auth/widgets/login_form.dart';
+import 'package:heal_chat/constants/theme_constants.dart';
+import 'package:heal_chat/features/auth/widgets/auth_form.dart';
+import 'package:heal_chat/features/auth/widgets/top_image.dart';
 import 'package:heal_chat/utils/widgets.dart';
-
-import '../widgets/login_screen_top_image.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -15,7 +15,10 @@ class LoginScreen extends StatelessWidget {
           mobile: MobileLoginScreen(),
           desktop: Row(children: [
             Expanded(
-              child: LoginScreenTopImage(),
+              child: AuthTopImage(
+                imageAddress: 'assets/icons/login.svg',
+                imagePadding: defaultPadding * 2,
+              ),
             ),
             Expanded(
               child: Row(
@@ -23,7 +26,9 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 450,
-                    child: LoginForm(),
+                    child: AuthForm(
+                      isLoginForm: true,
+                    ),
                   ),
                 ],
               ),
@@ -43,13 +48,18 @@ class MobileLoginScreen extends StatelessWidget {
     return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        LoginScreenTopImage(),
+        AuthTopImage(
+          imageAddress: 'assets/icons/login.svg',
+          imagePadding: defaultPadding * 2,
+        ),
         Row(
           children: [
             Spacer(),
             Expanded(
               flex: 8,
-              child: LoginForm(),
+              child: AuthForm(
+                isLoginForm: true,
+              ),
             ),
             Spacer(),
           ],

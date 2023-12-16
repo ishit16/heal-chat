@@ -22,7 +22,7 @@ class LoginSignupButton extends StatelessWidget {
           height: 16,
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () => GoRouter.of(context).go("/signup"),
           style: ElevatedButton.styleFrom(
             backgroundColor: kPrimaryLightColor,
             elevation: 0,

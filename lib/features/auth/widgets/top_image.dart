@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:heal_chat/constants/theme_constants.dart';
 
-class LoginScreenTopImage extends StatelessWidget {
-  const LoginScreenTopImage({super.key});
+class AuthTopImage extends StatelessWidget {
+  final double imagePadding;
+  final String imageAddress;
+  const AuthTopImage(
+      {super.key, required this.imageAddress, required this.imagePadding});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: defaultPadding * 2,
+        SizedBox(
+          height: imagePadding,
         ),
         Row(
           children: [
             const Spacer(),
             Expanded(
               flex: 8,
-              child: SvgPicture.asset("assets/icons/login.svg"),
+              child: SvgPicture.asset(imageAddress),
             ),
             const Spacer(),
           ],
         ),
-        const SizedBox(
-          height: defaultPadding * 2,
+        SizedBox(
+          height: imagePadding,
         ),
       ],
     );
