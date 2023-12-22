@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:heal_chat/constants/ui_constants/header.dart';
 import 'package:heal_chat/features/home/widgets/mood_card.dart';
+import 'package:heal_chat/features/home/widgets/upcoming_sessions.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,10 +17,26 @@ class HomeScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(top: 32, left: 24),
-                child: Header(heading: "Home"),
+                child: Header(
+                  heading: "Home",
+                ),
               ),
               SizedBox(
+                height: 30,
+              ),
+              UpcomingSession(),
+              SizedBox(
                 height: 60,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Header(
+                  heading: "Pick A Mood",
+                  fontSize: 18,
+                ),
+              ),
+              SizedBox(
+                height: 20,
               ),
               MoodCard(),
             ],

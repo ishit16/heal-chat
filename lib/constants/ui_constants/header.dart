@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Header extends StatelessWidget {
+  final double? fontSize;
   final String heading;
-  const Header({super.key, required this.heading});
+  const Header({super.key, required this.heading, this.fontSize});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class Header extends StatelessWidget {
                 child: Text(
                   heading,
                   style: GoogleFonts.roboto(
-                    fontSize: 38,
+                    fontSize: fontSize ?? 38,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
