@@ -22,11 +22,11 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 18,
               ),
               UpcomingSession(),
               SizedBox(
-                height: 60,
+                height: 18,
               ),
               Padding(
                 padding: EdgeInsets.only(left: 20),
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 2,
               ),
               MoodCard(),
             ],

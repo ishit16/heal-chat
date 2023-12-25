@@ -9,7 +9,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 42,
+      height: 76,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
