@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:heal_chat/constants/ui_constants/custom_card.dart';
 import 'package:heal_chat/models/mood_model.dart';
 
@@ -56,12 +57,15 @@ class MoodCard extends StatelessWidget {
               healthDetails[i].icon,
               Padding(
                 padding: const EdgeInsets.only(top: 15, bottom: 4),
-                child: Text(
-                  healthDetails[i].title,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                child: GestureDetector(
+                  onTap: () => GoRouter.of(context).go("/users"),
+                  child: Text(
+                    healthDetails[i].title,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
