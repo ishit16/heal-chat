@@ -4,9 +4,14 @@ import 'package:heal_chat/features/auth/widgets/auth_form.dart';
 import 'package:heal_chat/utils/widgets.dart';
 import '../widgets/top_image.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return const Background(

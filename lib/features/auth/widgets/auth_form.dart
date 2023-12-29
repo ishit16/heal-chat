@@ -1,12 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:heal_chat/constants/theme_constants.dart';
+import 'package:heal_chat/features/auth/application/auth_service.dart';
 
 import 'already_have_account.dart';
 
-class AuthForm extends StatelessWidget {
+class AuthForm extends ConsumerStatefulWidget {
   final bool isLoginForm;
   const AuthForm({super.key, required this.isLoginForm});
+
+  @override
+  ConsumerState<AuthForm> createState() => _AuthFormState();
+}
+
+class _AuthFormState extends ConsumerState<AuthForm> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
+  void onSignUp() {
+    ref.read(authServiceProvider.notifier).signUp(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +38,7 @@ class AuthForm extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            controller: emailController,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
@@ -29,6 +54,7 @@ class AuthForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
+              controller: passwordController,
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: kPrimaryColor,
@@ -43,9 +69,17 @@ class AuthForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           ElevatedButton(
-            onPressed: () => GoRouter.of(context).go("/home"),
+            onPressed: () {
+              if (widget.isLoginForm != true) {
+                onSignUp();
+              } else {
+                print("I will Log In Soon!");
+              }
+            },
             child: Text(
-              isLoginForm ? "Login".toUpperCase() : "Signup".toUpperCase(),
+              widget.isLoginForm
+                  ? "Login".toUpperCase()
+                  : "Signup".toUpperCase(),
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -54,11 +88,11 @@ class AuthForm extends StatelessWidget {
           const SizedBox(height: defaultPadding),
           AlreadyHaveAnAccountCheck(
             press: () {
-              isLoginForm
+              widget.isLoginForm
                   ? GoRouter.of(context).go("/signup")
                   : GoRouter.of(context).go("/login");
             },
-            login: isLoginForm,
+            login: widget.isLoginForm,
           ),
         ],
       ),
