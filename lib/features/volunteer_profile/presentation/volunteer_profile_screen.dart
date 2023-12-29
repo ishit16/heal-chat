@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:heal_chat/features/volunteer_profile/presentation/about_volunteer.dart';
 import 'package:heal_chat/features/volunteer_profile/presentation/profile_item.dart';
 
 class VolunteerProfileScreen extends StatelessWidget {
@@ -63,10 +64,26 @@ class VolunteerProfileScreen extends StatelessWidget {
                 Divider(
                   color: Colors.grey.shade900,
                 ),
+                const SizedBox(height: 20),
+                const ProfileItem(
+                  title: "All India Institute of Medical Sciences",
+                  icon: Icons.school,
+                ),
                 const SizedBox(height: 10),
                 const ProfileItem(
-                    title: "All India Institute of Medical Sciences",
-                    icon: Icons.school)
+                  title: "MBBS 3rd Year",
+                  icon: Icons.workspace_premium,
+                ),
+                const SizedBox(height: 10),
+                const ProfileItem(
+                  title: "Sessions Taken: 21",
+                  icon: Icons.group,
+                ),
+                Divider(
+                  color: Colors.grey.shade900,
+                ),
+                const SizedBox(height: 30),
+                const AboutVolunteer(aboutVolunteerText: "aboutVolunteerText")
               ],
             ),
           ),
