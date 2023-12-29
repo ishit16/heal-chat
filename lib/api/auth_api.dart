@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:heal_chat/core/failure.dart';
 import 'package:heal_chat/core/type_defs.dart';
+import 'package:heal_chat/providers/appwrite_providers.dart';
 
 abstract class IAuthAPI {
   FutureEither<model.User> signUp(
@@ -29,5 +30,5 @@ class AuthAPI implements IAuthAPI {
 }
 
 final authAPIProvider = Provider((ref) {
-  return AuthAPI(account: account);
+  return AuthAPI(account: ref.watch(appwriteAccountProvider));
 });
