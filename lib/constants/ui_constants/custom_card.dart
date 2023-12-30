@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:heal_chat/constants/theme_constants.dart';
 
 class CustomCard extends StatelessWidget {
   final Widget child;

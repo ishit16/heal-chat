@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:heal_chat/features/auth/view/signup_screen.dart';
 import 'package:heal_chat/features/choose_volunteer/presentation/select_users_screen.dart';
-import 'package:heal_chat/features/home/view/home_screen.dart';
+import 'package:heal_chat/features/home/presentation/home_screen.dart';
 import 'package:heal_chat/features/volunteer_profile/presentation/volunteer_profile_screen.dart';
 import 'package:heal_chat/features/welcome_screen/view/welcome_screen.dart';
 

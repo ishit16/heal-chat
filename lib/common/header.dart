@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:heal_chat/common/user_profile_avatar.dart';
 
 class Header extends StatelessWidget {
   final double? fontSize;
@@ -28,7 +29,8 @@ class Header extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          const UserProfileAvatar(),
         ],
       ),
     );
