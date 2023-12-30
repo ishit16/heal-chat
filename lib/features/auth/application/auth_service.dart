@@ -21,6 +21,21 @@ class AuthService extends StateNotifier<bool> {
       (l) => showSnackBar(context, l.message),
       (r) => print(r.email),
     );
+    state = false;
+  }
+
+  void login({
+    required String email,
+    required String password,
+    required BuildContext context,
+  }) async {
+    state = true;
+    final response = await _authAPI.login(email: email, password: password);
+    response.fold(
+      (l) => showSnackBar(context, l.message),
+      (r) => print(r.userId),
+    );
+    state = false;
   }
 }
 
