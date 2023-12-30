@@ -47,6 +47,15 @@ class AuthService extends StateNotifier<bool> {
   }
 
   Future<model.User?> currentUser() => _authAPI.currentUserAccount();
+  void logout(BuildContext context) async {
+    final response = await _authAPI.logout();
+    response.fold(
+      (l) => null,
+      (r) => {
+        GoRouter.of(context).pushReplacement("/login"),
+      },
+    );
+  }
 }
 
 final authServiceProvider = StateNotifierProvider<AuthService, bool>((ref) {
