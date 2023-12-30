@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:heal_chat/common/user_profile_screen.dart';
 import 'package:heal_chat/features/auth/application/auth_service.dart';
 import 'package:heal_chat/features/auth/view/signup_screen.dart';
 import 'package:heal_chat/features/choose_volunteer/presentation/select_users_screen.dart';
@@ -50,7 +51,11 @@ final goRouterProvider = Provider<GoRouter>(
         GoRoute(
           path: '/profile',
           builder: (context, state) => const VolunteerProfileScreen(),
-        )
+        ),
+        GoRoute(
+          path: '/my-profile',
+          builder: (context, state) => const UserProfileScreen(),
+        ),
       ],
     );
   },

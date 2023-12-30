@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heal_chat/features/auth/application/auth_service.dart';
 
@@ -17,9 +18,7 @@ class BottomSheetOption extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     void onLogout() {
-      print("Trying to log out");
       ref.read(authServiceProvider.notifier).logout(context);
-      print("done");
     }
 
     return Padding(
@@ -36,6 +35,8 @@ class BottomSheetOption extends ConsumerWidget {
             onTap: () {
               if (option == "Logout") {
                 onLogout();
+              } else if (option == "Profile Settings") {
+                GoRouter.of(context).go("/my-profile");
               }
             },
             child: Text(
