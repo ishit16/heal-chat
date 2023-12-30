@@ -12,7 +12,6 @@ import '../features/auth/view/login_screen.dart';
 final goRouterProvider = Provider<GoRouter>(
   (ref) {
     final currentUser = ref.watch(currentUserAccountProvider);
-    print(currentUser);
     return GoRouter(
       initialLocation: "/",
       redirect: (context, state) {
@@ -22,8 +21,6 @@ final goRouterProvider = Provider<GoRouter>(
               state.matchedLocation == "/login") {
             return "/home";
           }
-        } else {
-          return "/";
         }
         return null;
       },
