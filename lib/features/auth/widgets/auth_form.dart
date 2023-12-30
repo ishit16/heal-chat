@@ -32,6 +32,14 @@ class _AuthFormState extends ConsumerState<AuthForm> {
         );
   }
 
+  void onLogin() {
+    ref.read(authServiceProvider.notifier).login(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -73,7 +81,7 @@ class _AuthFormState extends ConsumerState<AuthForm> {
               if (widget.isLoginForm != true) {
                 onSignUp();
               } else {
-                print("I will Log In Soon!");
+                onLogin();
               }
             },
             child: Text(
