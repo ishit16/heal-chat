@@ -10,6 +10,13 @@ import 'package:heal_chat/features/welcome_screen/view/welcome_screen.dart';
 
 import '../features/auth/view/login_screen.dart';
 
+enum AppRoute {
+  welcome,
+  signin,
+  signup,
+  myprofile,
+}
+
 final goRouterProvider = Provider<GoRouter>(
   (ref) {
     final currentUser = ref.watch(currentUserAccountProvider);
@@ -28,9 +35,11 @@ final goRouterProvider = Provider<GoRouter>(
       routes: [
         GoRoute(
           path: '/',
+          name: AppRoute.welcome.name,
           builder: (context, state) => const WelcomeScreen(),
           routes: [
             GoRoute(
+              name: AppRoute.signin.name,
               path: 'login',
               builder: (context, state) => const LoginScreen(),
             ),

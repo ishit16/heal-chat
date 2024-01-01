@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:heal_chat/common/bottom_navigation.dart';
 import 'package:heal_chat/constants/ui_constants/theme_data.dart';
 import 'package:heal_chat/routing/app_router.dart';
@@ -18,6 +17,11 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final goRouter = ref.watch(goRouterProvider);
+    final String currentLocation =
+        goRouter.namedLocation(AppRoute.welcome.name);
+    final bool showNavBar = !(currentLocation == "/" ||
+        currentLocation == "/login" ||
+        currentLocation == "/signup");
     return MaterialApp.router(
       routerConfig: goRouter,
       debugShowCheckedModeBanner: false,
@@ -25,7 +29,7 @@ class MyApp extends ConsumerWidget {
       builder: (context, child) {
         return Scaffold(
           body: child,
-          bottomNavigationBar: const CustomNavigationBar(),
+          bottomNavigationBar: showNavBar ? const CustomNavigationBar() : null,
         );
       },
     );
