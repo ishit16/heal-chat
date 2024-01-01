@@ -1,12 +1,17 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:heal_chat/features/volunteer_profile/presentation/about_volunteer.dart';
-import 'package:heal_chat/features/volunteer_profile/presentation/profile_item.dart';
+import 'package:heal_chat/common/edit_user_info.dart';
+import 'package:heal_chat/common/user_profile_info.dart';
 
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({super.key});
 
+  @override
+  State<UserProfileScreen> createState() => _UserProfileScreenState();
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,21 +44,13 @@ class UserProfileScreen extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                Text(
-                  "Committed to creating a lasting impact",
-                  style: GoogleFonts.roboto(
-                    color: Colors.white60,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: 200,
                   child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        "Request Session",
+                        "Edit Profile",
                         style: GoogleFonts.lato(
                             color: Colors.white,
                             fontSize: 18,
@@ -65,25 +62,13 @@ class UserProfileScreen extends StatelessWidget {
                   color: Colors.grey.shade900,
                 ),
                 const SizedBox(height: 20),
-                const ProfileItem(
-                  title: "All India Institute of Medical Sciences",
-                  icon: Icons.school,
-                ),
-                const SizedBox(height: 10),
-                const ProfileItem(
-                  title: "MBBS 3rd Year",
-                  icon: Icons.workspace_premium,
-                ),
-                const SizedBox(height: 10),
-                const ProfileItem(
-                  title: "Sessions Taken: 21",
-                  icon: Icons.group,
-                ),
-                Divider(
-                  color: Colors.grey.shade900,
-                ),
-                const SizedBox(height: 30),
-                const AboutVolunteer(aboutVolunteerText: "aboutVolunteerText")
+                const EditUserInfo(),
+                // const UserProfileInformation(
+                //   schoolName: "Institute of Technology (Bombay)",
+                //   degree: 'B.Tech',
+                //   sessionsTaken: '21',
+                //   aboutVolunteerText: 'Hii',
+                // ),
               ],
             ),
           ),
