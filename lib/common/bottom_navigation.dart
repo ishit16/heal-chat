@@ -17,7 +17,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   void initState() {
     super.initState();
 
-    // Use Future.delayed to schedule the logic after the widget has been fully initialized
     Future.delayed(Duration.zero, () {
       final String currentRoute = GoRouterState.of(context).uri.toString();
       if (currentRoute == '/home') {

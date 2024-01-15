@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heal_chat/common/edit_user_info.dart';
 import 'package:heal_chat/common/layout.dart';
+import 'package:heal_chat/common/user_profile_info.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  const UserProfileScreen({super.key});
+  const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<UserProfileScreen> createState() => _UserProfileScreenState();
 }
 
 class _UserProfileScreenState extends State<UserProfileScreen> {
+  bool isEditing = false;
+  void editProfile() => setState(() {
+        isEditing = !isEditing;
+      });
+
   @override
   Widget build(BuildContext context) {
     return CommonLayout(
@@ -47,27 +53,31 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 SizedBox(
                   width: 200,
                   child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Edit Profile",
-                        style: GoogleFonts.lato(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600),
-                      )),
+                    onPressed: () => editProfile(),
+                    child: Text(
+                      isEditing ? "View Profile" : "Edit Profile",
+                      style: GoogleFonts.lato(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 30),
                 Divider(
                   color: Colors.grey.shade900,
                 ),
                 const SizedBox(height: 20),
-                const EditUserInfo(),
-                // const UserProfileInformation(
-                //   schoolName: "Institute of Technology (Bombay)",
-                //   degree: 'B.Tech',
-                //   sessionsTaken: '21',
-                //   aboutVolunteerText: 'Hii',
-                // ),
+                if (isEditing) // Conditionally render EditUserInfo widget
+                  const EditUserInfo()
+                else
+                  const UserProfileInformation(
+                    schoolName: "Institute of Technology (Bombay)",
+                    degree: 'B.Tech',
+                    sessionsTaken: '21',
+                    aboutVolunteerText: 'Hii',
+                  ),
               ],
             ),
           ),
