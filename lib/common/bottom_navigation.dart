@@ -14,15 +14,25 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   int currentIndex = 0;
 
   @override
-  Widget build(BuildContext context) {
-    final String currentRoute = GoRouterState.of(context).uri.toString();
-    print(currentIndex);
-    if (currentRoute == '/home') {
-      currentIndex = 0;
-    } else if (currentRoute == '/my-profile') {
-      currentIndex = 1;
-    }
+  void initState() {
+    super.initState();
 
+    // Use Future.delayed to schedule the logic after the widget has been fully initialized
+    Future.delayed(Duration.zero, () {
+      final String currentRoute = GoRouterState.of(context).uri.toString();
+      if (currentRoute == '/home') {
+        currentIndex = 0;
+      } else if (currentRoute == '/profile') {
+        currentIndex = 1;
+      }
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return CurvedNavigationBar(
       height: 65,
       animationDuration: const Duration(milliseconds: 400),
