@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:heal_chat/api/auth_api.dart';
+import 'package:heal_chat/api/user_api.dart';
+import 'package:heal_chat/models/user_model.dart';
 import 'package:heal_chat/utils/snackbar.dart';
+import 'package:heal_chat/utils/utils.dart';
 
 class AuthService extends StateNotifier<bool> {
   final AuthAPI _authAPI;
-  AuthService({required AuthAPI authAPI})
+  final UserAPI _userAPI;
+  AuthService({required AuthAPI authAPI, required UserAPI userAPI})
       : _authAPI = authAPI,
+        _userAPI = userAPI,
         super(false);
   // if the app is loading?
   // state = isLoading
@@ -21,9 +26,22 @@ class AuthService extends StateNotifier<bool> {
     final response = await _authAPI.signUp(email: email, password: password);
     response.fold(
       (l) => showSnackBar(context, l.message),
-      (r) {
-        showSnackBar(context, "Account Created!");
-        GoRouter.of(context).push("/login");
+      (r) async {
+        UserModel userModel = UserModel(
+          email: email,
+          name: getNameFromEmail(email),
+          profilePic: '',
+          bannerPic: '',
+          uid: '',
+          bio: '',
+        );
+        final res = await _userAPI.saveUserData(userModel);
+        res.fold((l) {
+          showSnackBar(context, l.message);
+        }, (r) {
+          showSnackBar(context, "Account Created!");
+          GoRouter.of(context).push("/login");
+        });
       },
     );
     state = false;
@@ -60,6 +78,7 @@ class AuthService extends StateNotifier<bool> {
 
 final authServiceProvider = StateNotifierProvider<AuthService, bool>((ref) {
   return AuthService(
+    userAPI: ref.watch(userAPIProvider),
     authAPI: ref.watch(authAPIProvider),
   );
 });
