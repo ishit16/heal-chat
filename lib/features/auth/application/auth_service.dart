@@ -20,19 +20,22 @@ class AuthService extends StateNotifier<bool> {
   void signUp({
     required String email,
     required String password,
+    required String name,
     required BuildContext context,
   }) async {
     state = true;
-    final response = await _authAPI.signUp(email: email, password: password);
+    final response =
+        await _authAPI.signUp(email: email, password: password, name: name);
     response.fold(
       (l) => showSnackBar(context, l.message),
       (r) async {
         UserModel userModel = UserModel(
           email: email,
-          name: getNameFromEmail(email),
+          name: name,
           profilePic: '',
-          bannerPic: '',
-          uid: '',
+          mostRecentSchool: '',
+          mostRecentDegree: '',
+          uid: r.$id,
           bio: '',
         );
         final res = await _userAPI.saveUserData(userModel);
@@ -74,7 +77,24 @@ class AuthService extends StateNotifier<bool> {
       },
     );
   }
+
+  Future<UserModel> getUserData(String uid) async {
+    final document = await _userAPI.getUserData(uid);
+    final updatedUser = UserModel.fromMap(document.data);
+    return updatedUser;
+  }
 }
+
+final currentUserDetailsProvider = FutureProvider((ref) {
+  final currentUserId = ref.watch(currentUserAccountProvider).value!.$id;
+  final userDetails = ref.watch(userDataProvider(currentUserId));
+  return userDetails.value;
+});
+
+final userDataProvider = FutureProvider.family((ref, String uid) async {
+  final authController = ref.watch(authServiceProvider.notifier);
+  return authController.getUserData(uid);
+});
 
 final authServiceProvider = StateNotifierProvider<AuthService, bool>((ref) {
   return AuthService(

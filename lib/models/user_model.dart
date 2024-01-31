@@ -5,14 +5,16 @@ class UserModel {
   final String email;
   final String name;
   final String profilePic;
-  final String bannerPic;
+  final String mostRecentSchool;
+  final String mostRecentDegree;
   final String uid;
   final String bio;
   const UserModel({
     required this.email,
     required this.name,
     required this.profilePic,
-    required this.bannerPic,
+    required this.mostRecentSchool,
+    required this.mostRecentDegree,
     required this.uid,
     required this.bio,
   });
@@ -21,7 +23,8 @@ class UserModel {
     String? email,
     String? name,
     String? profilePic,
-    String? bannerPic,
+    String? mostRecentSchool,
+    String? mostRecentDegree,
     String? uid,
     String? bio,
   }) {
@@ -29,7 +32,8 @@ class UserModel {
       email: email ?? this.email,
       name: name ?? this.name,
       profilePic: profilePic ?? this.profilePic,
-      bannerPic: bannerPic ?? this.bannerPic,
+      mostRecentSchool: mostRecentSchool ?? this.mostRecentSchool,
+      mostRecentDegree: mostRecentDegree ?? this.mostRecentDegree,
       uid: uid ?? this.uid,
       bio: bio ?? this.bio,
     );
@@ -41,7 +45,8 @@ class UserModel {
     result.addAll({'email': email});
     result.addAll({'name': name});
     result.addAll({'profilePic': profilePic});
-    result.addAll({'bannerPic': bannerPic});
+    result.addAll({'mostRecentSchool': mostRecentSchool});
+    result.addAll({'mostRecentDegree': mostRecentDegree});
     result.addAll({'bio': bio});
 
     return result;
@@ -52,7 +57,8 @@ class UserModel {
       email: map['email'] ?? '',
       name: map['name'] ?? '',
       profilePic: map['profilePic'] ?? '',
-      bannerPic: map['bannerPic'] ?? '',
+      mostRecentSchool: map['mostRecentSchool'] ?? '',
+      mostRecentDegree: map['mostRecentDegree'] ?? '',
       uid: map['\$id'] ?? '',
       bio: map['bio'] ?? '',
     );
@@ -60,7 +66,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(email: $email, name: $name, profilePic: $profilePic, bannerPic: $bannerPic, uid: $uid, bio: $bio,)';
+    return 'UserModel(email: $email, name: $name, profilePic: $profilePic, mostRecentSchool: $mostRecentSchool, mostRecentDegree: $mostRecentDegree, uid: $uid, bio: $bio,)';
   }
 
   @override
@@ -71,7 +77,8 @@ class UserModel {
         other.email == email &&
         other.name == name &&
         other.profilePic == profilePic &&
-        other.bannerPic == bannerPic &&
+        other.mostRecentSchool == mostRecentSchool &&
+        other.mostRecentDegree == mostRecentDegree &&
         other.uid == uid &&
         other.bio == bio;
   }
@@ -81,7 +88,8 @@ class UserModel {
     return email.hashCode ^
         name.hashCode ^
         profilePic.hashCode ^
-        bannerPic.hashCode ^
+        mostRecentSchool.hashCode ^
+        mostRecentDegree.hashCode ^
         uid.hashCode ^
         bio.hashCode;
   }

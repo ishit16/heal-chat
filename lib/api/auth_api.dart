@@ -8,7 +8,7 @@ import 'package:heal_chat/providers/appwrite_providers.dart';
 
 abstract class IAuthAPI {
   FutureEither<model.User> signUp(
-      {required String email, required String password});
+      {required String email, required String password, required String name});
   FutureEither<model.Session> login(
       {required String email, required String password});
   Future<model.User?> currentUserAccount();
@@ -21,10 +21,12 @@ class AuthAPI implements IAuthAPI {
 
   @override
   FutureEither<model.User> signUp(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String name}) async {
     try {
       final account = await _account.create(
-          userId: ID.unique(), email: email, password: password);
+          userId: ID.unique(), email: email, password: password, name: name);
       return right(account);
     } on AppwriteException catch (e, stackTrace) {
       return left(Failure(e.message ?? 'Unexpected Error', stackTrace));

@@ -16,16 +16,19 @@ class AuthForm extends ConsumerStatefulWidget {
 
 class _AuthFormState extends ConsumerState<AuthForm> {
   final emailController = TextEditingController();
+  final nameController = TextEditingController();
   final passwordController = TextEditingController();
   @override
   void dispose() {
     super.dispose();
+    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
   }
 
   void onSignUp() {
     ref.read(authServiceProvider.notifier).signUp(
+          name: nameController.text,
           email: emailController.text,
           password: passwordController.text,
           context: context,
@@ -45,33 +48,46 @@ class _AuthFormState extends ConsumerState<AuthForm> {
     return Form(
       child: Column(
         children: [
-          TextFormField(
-            controller: emailController,
-            keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.next,
-            cursorColor: kPrimaryColor,
-            onSaved: (email) {},
-            decoration: const InputDecoration(
-              hintText: "Your Email",
-              prefixIcon: Padding(
-                padding: EdgeInsets.all(defaultPadding),
-                child: Icon(Icons.person),
+          if (!widget.isLoginForm)
+            TextFormField(
+              controller: nameController,
+              keyboardType: TextInputType.name,
+              textInputAction: TextInputAction.next,
+              cursorColor: kPrimaryColor,
+              onSaved: (email) {},
+              decoration: const InputDecoration(
+                hintText: "Your Name",
+                prefixIcon: Padding(
+                  padding: EdgeInsets.all(defaultPadding),
+                  child: Icon(Icons.person),
+                ),
               ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: defaultPadding),
             child: TextFormField(
-              controller: passwordController,
-              textInputAction: TextInputAction.done,
-              obscureText: true,
+              controller: emailController,
+              textInputAction: TextInputAction.next,
               cursorColor: kPrimaryColor,
               decoration: const InputDecoration(
-                hintText: "Your password",
+                hintText: "Your Email",
                 prefixIcon: Padding(
                   padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.lock),
                 ),
+              ),
+            ),
+          ),
+          TextFormField(
+            controller: passwordController,
+            textInputAction: TextInputAction.done,
+            obscureText: true,
+            cursorColor: kPrimaryColor,
+            decoration: const InputDecoration(
+              hintText: "Your Password",
+              prefixIcon: Padding(
+                padding: EdgeInsets.all(defaultPadding),
+                child: Icon(Icons.lock),
               ),
             ),
           ),

@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:heal_chat/common/edit_user_info.dart';
 import 'package:heal_chat/common/layout.dart';
 import 'package:heal_chat/common/user_profile_info.dart';
+import 'package:heal_chat/features/auth/application/auth_service.dart';
 
-class UserProfileScreen extends StatefulWidget {
+class UserProfileScreen extends ConsumerStatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<UserProfileScreen> createState() => _UserProfileScreenState();
+  ConsumerState<UserProfileScreen> createState() => _UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen> {
+class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
   bool isEditing = false;
   void editProfile() => setState(() {
         isEditing = !isEditing;
@@ -19,6 +21,8 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = ref.watch(currentUserDetailsProvider).value;
+    print(currentUser);
     return CommonLayout(
       child: SingleChildScrollView(
         child: Center(
